@@ -1,7 +1,5 @@
 const Button = (props) => {
-  // eslint-disable-next-line react/prop-types
-  const { text, type } = props;
-  console.log(props);
+  const { text, type="button" } = props;
   return <button type={type}>{text}</button>
 }
 
