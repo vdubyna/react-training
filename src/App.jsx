@@ -1,6 +1,7 @@
 import './App.css'
 import LoginForm from "./components/LoginForm/LoginForm.jsx";
 import Header from "./components/Header/Header.jsx";
+import Menu from "./components/Menu/Menu.jsx";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
                     <LoginForm />
                 </main>
             </div>
+            <Menu />
         </>
     )
 }

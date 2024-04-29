@@ -1,6 +1,10 @@
 const Button = (props) => {
-  const { text, type="button" } = props;
-  return <button type={type}>{text}</button>
+    const {text, className, handleClickOnButton, type="button"} = props;
+
+    return <button type={type}
+                   className={className}
+                   onClick={handleClickOnButton}
+    >{text}</button>
 }
 
 export default Button;
