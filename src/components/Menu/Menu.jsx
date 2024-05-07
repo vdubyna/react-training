@@ -1,11 +1,29 @@
 import '../../assets/css/Menu.css'
-import pizzas from "./data.js";
 import MenuItem from "./MenuItem/MenuItem.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const Menu = () => {
 
+    const [menu, setMenu] = useState([])
     const [cart, setCart] = useState([]);
+
+    const getAllPizzas = async () => {
+        try {
+            const res = await fetch('https://react-fast-pizza-api.onrender.com/api/menu');
+            if (!res.ok) {
+                throw new Error('Fetch failed')
+            }
+            const data = await  res.json();
+            setMenu(data.data);
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    useEffect(() => {
+        getAllPizzas();
+    }, []);
+
 
     const handleAddToCart = (cartItemId) => {
         const callback = (cart) => {
@@ -48,7 +66,7 @@ const Menu = () => {
 
     return (
         <ul>
-            {pizzas.map((pizza) => {
+            {menu.map((pizza) => {
                 return <MenuItem
                     key={pizza.id}
                     pizza={pizza}
