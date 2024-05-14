@@ -1,6 +1,6 @@
 const Input = (props) => {
-  const { placeholder } = props;
-  return <input type="text" placeholder={placeholder} />
+  const { placeholder, onChange } = props;
+  return <input onChange={onChange} type="text" placeholder={placeholder} />
 }
 
 export default Input;
