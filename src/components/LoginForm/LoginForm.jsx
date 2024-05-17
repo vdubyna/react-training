@@ -4,13 +4,12 @@ import Button from "../Button/Button.jsx";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-const LoginForm = () => {
-
+const LoginForm = ({onSubmit}) => {
     const [username, setUsername] = useState("");
     const navigate = useNavigate();
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log("username", username);
+        onSubmit && onSubmit(username)
         navigate('/');
     }
 
