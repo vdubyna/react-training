@@ -5,18 +5,22 @@ import MenuPage from "./pages/Menu.jsx";
 import LoginPage from "./pages/Login.jsx";
 import MainPage from "./pages/Main.jsx";
 import PageNotFound from "./pages/PageNotFound.jsx";
+import OrderNewPage from "./pages/OrderNew.jsx";
 
 function App() {
 
     return (
         <>
             <Header />
-            <Routes>
-                <Route path='/' element={<MainPage />} />
-                <Route path='/menu' element={<MenuPage />} />
-                <Route path='/login' element={<LoginPage />} />
-                <Route path='*' element={<PageNotFound />} />
-            </Routes>
+            <div className="wrapper">
+                <Routes>
+                    <Route path='/' element={<MainPage />} />
+                    <Route path='/menu' element={<MenuPage />} />
+                    <Route path='/login' element={<LoginPage />} />
+                    <Route path='/order/new' element={<OrderNewPage />} />
+                    <Route path='*' element={<PageNotFound />} />
+                </Routes>
+            </div>
         </>
     )
 }

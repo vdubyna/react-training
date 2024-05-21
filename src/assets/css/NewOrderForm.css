@@ -1,0 +1,42 @@
+.new-order-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: auto;
+  padding-top: 50px;
+}
+
+.new-order-form .field-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.new-order-form label {
+  width: 150px; /* Фіксована ширина для лейблів */
+  text-align: left;
+}
+
+.new-order-form input {
+  flex-grow: 1; /* Зробити інпут гнучким */
+  margin-left: 10px; /* Відступ між лейблом та інпутом */
+}
+
+.new-order-form .error-block {
+  color: #ff6666; /* Менш яскравий колір */
+  padding-left: 160px;
+  margin-bottom: 10px;
+  text-align: left; /* Вирівнювання по лівому краю */
+}
+
+.new-order-form button {
+  align-self: flex-start; /* Вирівнювання кнопки по лівому краю */
+  width: 350px; /* Фіксована ширина кнопки */
+  margin-top: 20px;
+}
+
+.is-high-priority input {
+  margin-left: 160px;
+  margin-right: 15px;
+}

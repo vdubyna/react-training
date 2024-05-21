@@ -11,6 +11,7 @@ const Header = () => {
             <NavLink className="logo" to='/'>Pizza Day</NavLink>
             <nav className='nav'>
                 <NavLink to='/menu'>Menu</NavLink>
+                <NavLink to='/order/new'>New Order</NavLink>
             </nav>
             <div>{isAuth ? username : <NavLink to='/login'>Login</NavLink>}</div>
             {isAuth && <button onClick={onLogout}>Logout</button>}
