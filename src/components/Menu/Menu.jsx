@@ -1,78 +1,35 @@
 import '../../assets/css/Menu.css'
 import MenuItem from "./MenuItem/MenuItem.jsx";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {addToCart, getAllPizzas, removeFromCart} from "../../redux/slices/cartSlice.js";
 
 const Menu = () => {
 
-    const [menu, setMenu] = useState([])
-    const [cart, setCart] = useState([]);
-
-    const getAllPizzas = async () => {
-        try {
-            const res = await fetch('https://react-fast-pizza-api.onrender.com/api/menu');
-            if (!res.ok) {
-                throw new Error('Fetch failed')
-            }
-            const data = await  res.json();
-            setMenu(data.data);
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
+    const pizzas = useSelector(store => store.cart.pizzas)
+    const cartItems = useSelector(store => store.cart.cartItems);
+    const dispatch = useDispatch();
     useEffect(() => {
-        getAllPizzas();
-    }, []);
+        dispatch(getAllPizzas());
+    }, [dispatch]);
 
-
-    const handleAddToCart = (cartItemId) => {
-        const callback = (cart) => {
-            // if new we add it to the cart
-            if (!cart.find((item) => item.id === cartItemId)) {
-                return [...cart, {
-                    id: cartItemId,
-                    qty: 1
-                }]
-            }
-            // if same we increase the qty
-            return cart.map((item) => {
-                if (item.id === cartItemId) {
-                    return {
-                        ...item,
-                        qty: item.qty + 1
-                    }
-                }
-                return item;
-            });
-        }
-        setCart(callback);
+    const handleAddToCart = (pizza) => {
+        dispatch(addToCart(pizza));
     };
 
     const handleRemoveFromCart = (cartItemId) => {
-        const callback = (cart) => {
-            let newCart = cart.map((item) => {
-                if (item.id === cartItemId) {
-                    return {
-                        ...item,
-                        qty: item.qty - 1
-                    }
-                }
-                return item;
-            });
-            return newCart.filter(item => item.qty > 0);
-        }
-        setCart(callback);
+        dispatch(removeFromCart(cartItemId));
     };
 
     return (
         <ul>
-            {menu.map((pizza) => {
+            {pizzas.map((pizza) => {
                 return <MenuItem
                     key={pizza.id}
                     pizza={pizza}
                     handleAddToCart={handleAddToCart}
                     handleRemoveFromCart={handleRemoveFromCart}
-                    cartItem={cart.find((item) => item.id === pizza.id)}
+                    cartItem={cartItems.find((item) => item.id === pizza.id)}
                 />
             })}
         </ul>

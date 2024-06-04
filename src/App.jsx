@@ -6,6 +6,7 @@ import LoginPage from "./pages/Login.jsx";
 import MainPage from "./pages/Main.jsx";
 import PageNotFound from "./pages/PageNotFound.jsx";
 import OrderNewPage from "./pages/OrderNew.jsx";
+import SuccessPage from "./pages/Success.jsx";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
                     <Route path='/menu' element={<MenuPage />} />
                     <Route path='/login' element={<LoginPage />} />
                     <Route path='/order/new' element={<OrderNewPage />} />
+                    <Route path='/success/:orderId' element={<SuccessPage />} />
                     <Route path='*' element={<PageNotFound />} />
                 </Routes>
             </div>

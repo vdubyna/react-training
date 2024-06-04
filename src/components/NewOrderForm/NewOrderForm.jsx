@@ -3,8 +3,16 @@ import {Controller, useForm} from "react-hook-form";
 import * as Yup from 'yup'
 import {yupResolver} from "@hookform/resolvers/yup";
 import Input from "../Input/Input.jsx";
+import {useDispatch, useSelector} from "react-redux";
+import {makeOrder} from "../../redux/slices/cartSlice.js";
+import {useNavigate} from "react-router-dom";
 
 const NewOrderForm = (props) => {
+
+    const totalPrice = useSelector(store => store.cart.totalPrice);
+    const cartItems = useSelector(store => store.cart.cartItems);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const formSchema = Yup.object().shape({
         firstname: Yup.string().required(),
@@ -14,8 +22,8 @@ const NewOrderForm = (props) => {
         address: Yup.string().required()
     });
 
-    const {handleSubmit, control, formState: {errors, isValidating}} = useForm({
-        mode: 'onSubmit',
+    const {handleSubmit, control, formState: {errors, isValidating, isValid}} = useForm({
+        mode: 'onChange',
         defaultValues: {
             firstname: props.username || "",
             phone: "",
@@ -26,7 +34,14 @@ const NewOrderForm = (props) => {
     });
 
     const handleFormSubmit = (data) => {
-        console.log('Form submitted', data)
+        if (!isValid) {
+            return;
+        }
+        dispatch(makeOrder({orderDetails: data, cartItems: cartItems, totalPrice: totalPrice}))
+            .unwrap()
+            .then(({data}) => {
+                navigate('/success/' + data.id);
+            });
     }
 
     return (
@@ -70,7 +85,7 @@ const NewOrderForm = (props) => {
                 <div>Want to give your order priority?</div>
             </div>
 
-            <button type="submit" disabled={isValidating} onClick={handleFormSubmit}>Order now for €39.00</button>
+            <button type="submit" disabled={isValidating}>Order now for €{totalPrice}</button>
         </form>
     );
 }

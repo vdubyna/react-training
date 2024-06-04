@@ -3,7 +3,6 @@ import Button from "../../Button/Button.jsx";
 const MenuItem = ({pizza, handleAddToCart, handleRemoveFromCart, cartItem}) => {
 
     const {name, ingredients, unitPrice, imageUrl, soldOut} = pizza;
-
     return (
         <li className="pizza">
             <img src={imageUrl} className="pizza__image" alt={name}/>
@@ -19,10 +18,10 @@ const MenuItem = ({pizza, handleAddToCart, handleRemoveFromCart, cartItem}) => {
                                 <p className="pizza__price">€{unitPrice}</p>
                                 <Button className="button" handleClickOnButton={() => handleRemoveFromCart(pizza.id)} text="-" />
                                 {cartItem.qty}
-                                <Button className="button" handleClickOnButton={() => handleAddToCart(pizza.id)} text="+" />
+                                <Button className="button" handleClickOnButton={() => handleAddToCart(pizza)} text="+" />
                             </>
                             ) : (
-                                <Button className="button" handleClickOnButton={() => handleAddToCart(pizza.id)} text="Add to cart" />
+                                <Button className="button" handleClickOnButton={() => handleAddToCart(pizza)} text="Add to cart" />
                             )
                         }
                     </>)}
